@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from 'react'
 import { Reveal } from './reveal'
 
 const STATS = [
-  { value: 2400, suffix: 'm²', label: 'LED deployed per year' },
-  { value: 640, suffix: '+', label: 'Flagship productions' },
-  { value: 38, suffix: '', label: 'Countries operated in' },
+  { value: 500, suffix: '+', label: 'Events delivered worldwide' },
+  { value: 120, suffix: '+', label: 'Cities transformed' },
+  { value: 98, suffix: '%', label: 'Client satisfaction' },
   { value: 99.9, suffix: '%', label: 'Show-time uptime', decimals: 1 },
 ]
 
