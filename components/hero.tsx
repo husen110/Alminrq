@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion'
-import { ArrowRight, ArrowUpRight, Volume2, VolumeX } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, RotateCcw, Volume2, VolumeX } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { MagneticButton } from './magnetic-button'
 
@@ -12,6 +12,7 @@ export function Hero() {
   const ref = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isMuted, setIsMuted] = useState(true)
+  const [showFinalImage, setShowFinalImage] = useState(false)
   const pointerX = useMotionValue(50)
   const pointerY = useMotionValue(45)
   const smoothX = useSpring(pointerX, { stiffness: 90, damping: 24 })
@@ -39,16 +40,26 @@ export function Hero() {
           alt="A vast premium event stage at night with curved LED walls emerging from darkness"
           className="h-full w-full object-cover"
         />
-        <video
+        <motion.img
+          src="/minarq-concert-stage.png"
+          alt="MINARQ concert stage with curved LED walls, suspended speakers and white light beams"
+          initial={false}
+          animate={{ opacity: showFinalImage ? 1 : 0, scale: showFinalImage ? 1 : 1.025 }}
+          transition={{ duration: 1.2, ease: EASE }}
+          className="absolute inset-0 h-full w-full object-cover contrast-125 brightness-110 saturate-110"
+        />
+        <motion.video
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
           src="/Concert_stage_with_MINARQ_logo_202607280951.mp4"
           poster="/hero-stage.png"
           autoPlay
           muted={isMuted}
-          loop
           playsInline
           preload="metadata"
+          onEnded={() => setShowFinalImage(true)}
+          animate={{ opacity: showFinalImage ? 0 : 1 }}
+          transition={{ duration: 1.1, ease: EASE }}
           aria-label="MINARQ concert stage production showreel"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/75 via-background/20 to-background" />
@@ -133,6 +144,12 @@ export function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.35, duration: 0.8 }}
         onClick={() => {
+          if (showFinalImage && videoRef.current) {
+            setShowFinalImage(false)
+            videoRef.current.currentTime = 0
+            void videoRef.current.play()
+            return
+          }
           const nextMuted = !isMuted
           setIsMuted(nextMuted)
           if (videoRef.current) {
@@ -141,11 +158,11 @@ export function Hero() {
           }
         }}
         className="glass absolute bottom-7 right-5 z-20 flex items-center gap-2 rounded-full px-4 py-3 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-foreground hover:text-background md:bottom-8 md:right-8"
-        aria-label={isMuted ? 'Play hero video with sound' : 'Mute hero video'}
-        aria-pressed={!isMuted}
+        aria-label={showFinalImage ? 'Replay hero video' : isMuted ? 'Play hero video with sound' : 'Mute hero video'}
+        aria-pressed={showFinalImage ? undefined : !isMuted}
       >
-        {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-        <span className="hidden sm:inline">{isMuted ? 'Sound on' : 'Sound off'}</span>
+        {showFinalImage ? <RotateCcw className="h-4 w-4" /> : isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+        <span className="hidden sm:inline">{showFinalImage ? 'Replay film' : isMuted ? 'Sound on' : 'Sound off'}</span>
       </motion.button>
 
       <motion.div
