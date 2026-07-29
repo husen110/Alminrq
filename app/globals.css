@@ -6,7 +6,7 @@
 
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-syne), var(--font-inter), sans-serif;
+  --font-display: var(--font-space), ui-sans-serif, system-ui, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -166,11 +166,22 @@
   ::selection {
     background: oklch(0.72 0.13 75 / 0.3);
   }
+  /* Visible keyboard focus — the base `*` rule only sets an outline color,
+     never a width/style, so focus was effectively invisible. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  /* Render Archivo's width axis slightly expanded for the display headlines. */
+  .font-display {
+    font-stretch: 110%;
   }
   .glass {
     background: color-mix(in oklch, var(--card) 55%, transparent);
@@ -185,9 +196,6 @@
     background-image: linear-gradient(oklch(1 0 0 / 4%) 1px, transparent 1px), linear-gradient(90deg, oklch(1 0 0 / 4%) 1px, transparent 1px);
     background-size: 64px 64px;
   }
-  .glow-cyan {
-    box-shadow: 0 0 70px oklch(0.72 0.12 215 / 20%);
-  }
   .gpu {
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -195,17 +203,22 @@
   }
 }
 
-/* Keep the authored dark palette stable regardless of OS preference. */
+/* Keep the authored dark palette stable regardless of OS preference.
+   Neutrals carry a subtle warm tint (hue 74) that ties into the gold accent
+   so the greys read intentional rather than dead-neutral. */
 :root,
 .dark {
-  --background: oklch(0.09 0.002 260);
-  --foreground: oklch(0.97 0 0);
-  --card: oklch(0.13 0.003 260);
-  --card-foreground: oklch(0.97 0 0);
-  --primary: oklch(0.97 0 0);
-  --primary-foreground: oklch(0.09 0.002 260);
-  --muted: oklch(0.18 0.003 260);
-  --muted-foreground: oklch(0.64 0.006 260);
+  --background: oklch(0.09 0.008 74);
+  --foreground: oklch(0.97 0.005 74);
+  --card: oklch(0.13 0.008 74);
+  --card-foreground: oklch(0.97 0.005 74);
+  --popover: oklch(0.12 0.008 74);
+  --popover-foreground: oklch(0.97 0.005 74);
+  --primary: oklch(0.97 0.005 74);
+  --primary-foreground: oklch(0.09 0.008 74);
+  --secondary: oklch(0.18 0.008 74);
+  --muted: oklch(0.18 0.008 74);
+  --muted-foreground: oklch(0.70 0.014 74);
   --accent: oklch(0.72 0.13 75);
   --accent-foreground: oklch(0.12 0.01 75);
   --border: oklch(1 0 0 / 8%);

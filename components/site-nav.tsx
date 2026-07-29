@@ -6,10 +6,10 @@ import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
 const LINKS = [
-  { label: 'Experiences', href: '#services' },
-  { label: 'Configure', href: '#configure' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Studio', href: '#studio' },
+  { label: 'Home', href: '/' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Studio', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export function SiteNav() {
@@ -30,7 +30,7 @@ export function SiteNav() {
           scrolled ? 'glass' : 'bg-transparent',
         )}
       >
-        <a href="#top" className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-md border border-white/20">
             <span className="h-2 w-2 rounded-full bg-accent" />
           </span>
@@ -51,7 +51,7 @@ export function SiteNav() {
         </div>
 
         <a
-          href="#contact"
+          href="/contact"
           className="hidden rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 md:inline-block"
         >
           Request Proposal
@@ -85,7 +85,7 @@ export function SiteNav() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="/contact"
               onClick={() => setOpen(false)}
               className="mt-1 rounded-xl bg-primary px-4 py-3 text-center text-sm font-medium text-primary-foreground"
             >

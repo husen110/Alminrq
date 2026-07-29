@@ -8,7 +8,7 @@ const EASE = [0.16, 1, 0.3, 1] as const
 export function Reveal({
   children,
   delay = 0,
-  y = 28,
+  y = 18,
   className,
   once = true,
 }: {
@@ -21,10 +21,10 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: '-80px' }}
-      transition={{ duration: 1, ease: EASE, delay }}
+      initial={{ opacity: 0, y, filter: 'blur(6px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once, margin: '-60px' }}
+      transition={{ duration: 0.6, ease: EASE, delay }}
     >
       {children}
     </motion.div>
@@ -52,9 +52,9 @@ export function RevealText({
             whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{
-              duration: 1,
+              duration: 0.7,
               ease: EASE,
-              delay: delay + i * 0.06,
+              delay: delay + i * 0.05,
             }}
           >
             {word}

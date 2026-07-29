@@ -1,15 +1,32 @@
 const COLUMNS = [
   {
     title: 'Experiences',
-    links: ['LED Walls', 'Stage Production', 'Audio Systems', 'Lighting', 'Trussing'],
+    links: [
+      { label: 'LED Walls', href: '/#services' },
+      { label: 'Stage Production', href: '/#services' },
+      { label: 'Audio Systems', href: '/#services' },
+      { label: 'Lighting', href: '/#services' },
+      { label: 'Configurator', href: '/#configure' },
+    ],
   },
   {
     title: 'Studio',
-    links: ['About', 'Selected Work', 'Careers', 'Press', 'Contact'],
+    links: [
+      { label: 'About', href: '/about' },
+      { label: 'Selected Work', href: '/projects' },
+      { label: 'Careers', href: '/about#careers' },
+      { label: 'Press', href: '/about#press' },
+      { label: 'Contact', href: '/contact' },
+    ],
   },
   {
     title: 'Connect',
-    links: ['Instagram', 'LinkedIn', 'Vimeo', 'YouTube'],
+    links: [
+      { label: 'Instagram', href: '#' },
+      { label: 'LinkedIn', href: '#' },
+      { label: 'Vimeo', href: '#' },
+      { label: 'YouTube', href: '#' },
+    ],
   },
 ]
 
@@ -38,12 +55,12 @@ export function SiteFooter() {
               </h3>
               <ul className="mt-5 flex flex-col gap-3">
                 {col.links.map((link) => (
-                  <li key={link}>
+                  <li key={link.label}>
                     <a
-                      href="#"
+                      href={link.href}
                       className="text-sm text-foreground/80 transition-colors hover:text-accent"
                     >
-                      {link}
+                      {link.label}
                     </a>
                   </li>
                 ))}

@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { MagneticButton } from './magnetic-button'
 
 const EASE = [0.16, 1, 0.3, 1] as const
-const LINES = ["We don't build events.", 'We build experiences.']
+const LINES = ["We don't", 'build events.', 'We build', 'experiences.']
 const SLIDE_DURATION = 5200
 
 type Slide = {
@@ -154,7 +154,7 @@ export function Hero() {
                 }}
                 exit={{ opacity: 0 }}
                 transition={{
-                  opacity: { duration: 1.3, ease: EASE },
+                  opacity: { duration: 0.9, ease: EASE },
                   scale: { duration: SLIDE_DURATION / 1000 + 1.4, ease: 'linear' },
                   x: { duration: SLIDE_DURATION / 1000 + 1.4, ease: 'linear' },
                   y: { duration: SLIDE_DURATION / 1000 + 1.4, ease: 'linear' },
@@ -177,7 +177,7 @@ export function Hero() {
           preload="metadata"
           onEnded={() => setShowSlides(true)}
           animate={{ opacity: showSlides ? 0 : 1 }}
-          transition={{ duration: 1.2, ease: EASE }}
+          transition={{ duration: 0.8, ease: EASE }}
           aria-label="MINARQ concert stage production showreel"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/75 via-background/20 to-background" />
@@ -190,7 +190,7 @@ export function Hero() {
         style={{
           background: useTransform(
             [smoothX, smoothY],
-            ([x, y]) => `radial-gradient(circle 26rem at ${x}% ${y}%, oklch(0.72 0.12 215 / 0.14), transparent 70%)`,
+            ([x, y]) => `radial-gradient(circle 26rem at ${x}% ${y}%, oklch(0.72 0.13 75 / 0.16), transparent 70%)`,
           ),
         }}
       />
@@ -203,21 +203,21 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: EASE, delay: 0.35 }}
+          transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
           className="mb-6 flex items-center gap-3"
         >
           <span className="h-px w-10 bg-accent" />
           <span className="text-xs uppercase tracking-[0.35em] text-muted-foreground">Premium event technology</span>
         </motion.div>
 
-        <h1 className="max-w-5xl font-display text-5xl font-bold leading-[0.92] tracking-tight text-balance sm:text-6xl md:text-7xl lg:text-[6.6rem]">
+        <h1 className="max-w-5xl font-sans text-3xl font-bold leading-[1.02] tracking-tight text-balance sm:text-4xl md:text-5xl lg:text-[4rem]">
           {LINES.map((line, index) => (
-            <span key={line} className="block overflow-hidden pb-2">
+            <span key={line} className="block overflow-hidden pb-1">
               <motion.span
-                className={index === 1 ? 'block text-foreground' : 'block text-foreground/62'}
+                className={index >= 2 ? 'block text-foreground' : 'block text-foreground/62'}
                 initial={{ y: '115%', rotate: 1 }}
                 animate={{ y: 0, rotate: 0 }}
-                transition={{ duration: 1.15, ease: EASE, delay: 0.48 + index * 0.14 }}
+                transition={{ duration: 0.7, ease: EASE, delay: 0.3 + index * 0.09 }}
               >
                 {line}
               </motion.span>
@@ -228,7 +228,7 @@ export function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: showSlides ? 0 : 1, y: showSlides ? 12 : 0 }}
-          transition={{ duration: showSlides ? 0.55 : 1, ease: EASE, delay: showSlides ? 0 : 0.95 }}
+          transition={{ duration: showSlides ? 0.5 : 0.6, ease: EASE, delay: showSlides ? 0 : 0.55 }}
           className="mt-7 max-w-lg text-pretty text-base leading-relaxed text-muted-foreground md:text-lg"
           aria-hidden={showSlides}
         >
@@ -238,7 +238,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: showSlides ? 0 : 1, y: showSlides ? 12 : 0 }}
-          transition={{ duration: showSlides ? 0.55 : 1, ease: EASE, delay: showSlides ? 0 : 1.08 }}
+          transition={{ duration: showSlides ? 0.5 : 0.6, ease: EASE, delay: showSlides ? 0 : 0.68 }}
           className={`mt-9 flex flex-wrap items-center gap-4 ${showSlides ? 'pointer-events-none' : ''}`}
           aria-hidden={showSlides}
         >

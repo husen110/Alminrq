@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Inter, Syne } from 'next/font/google'
+import { Archivo, Inter } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
@@ -9,10 +9,12 @@ const inter = Inter({
   display: 'swap',
 })
 
-const syne = Syne({
+// Archivo variable font with the width axis so we can render it expanded
+// (font-stretch: 125%) for the big display headlines.
+const archivo = Archivo({
   subsets: ['latin'],
-  variable: '--font-syne',
-  weight: ['600', '700', '800'],
+  variable: '--font-space',
+  axes: ['wdth'],
   display: 'swap',
 })
 
@@ -34,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${syne.variable}`}>
+    <html lang="en" className={`dark ${inter.variable} ${archivo.variable}`}>
       <body className="bg-background font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
