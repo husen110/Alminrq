@@ -17,8 +17,8 @@ const PROJECTS = [
     number: '02',
     title: 'Nocturne',
     location: 'Milan · Italy',
-    image: '/project-gala.png',
-    meta: 'Transparent LED · Kinetic sculpture · Projection',
+    image: '/wedding.png',
+    meta: 'Floral LED backdrop · Wireless audio · Moving heads',
   },
   {
     number: '03',
@@ -26,6 +26,34 @@ const PROJECTS = [
     location: 'Barcelona · Spain',
     image: '/project-festival.png',
     meta: '42m stage · 680 fixtures · 120,000 guests',
+  },
+  {
+    number: '04',
+    title: 'Vows in Light',
+    location: 'Como · Italy',
+    image: '/orchestra.png',
+    meta: 'Scenic LED · Concealed audio · Decorative light',
+  },
+  {
+    number: '05',
+    title: 'State of the Nation',
+    location: 'Dubai · UAE',
+    image: '/corporate.png',
+    meta: 'Panoramic LED · Media servers · Global stream',
+  },
+  {
+    number: '06',
+    title: 'Family Welcomes You',
+    location: 'Jaipur · India',
+    image: '/entrance.png',
+    meta: 'Sunset LED backdrop · Stacked line array · Reflective staging',
+  },
+  {
+    number: '07',
+    title: 'Garden of Lotus',
+    location: 'Udaipur · India',
+    image: '/wed1.png',
+    meta: 'Floral canopy · LED screen · Ambient string lighting',
   },
 ]
 

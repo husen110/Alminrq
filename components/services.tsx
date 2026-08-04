@@ -16,14 +16,14 @@ const SERVICES: Service[] = [
   { index: '02', title: 'Interactive LED Floors', desc: 'Responsive surfaces that move with performers and audiences alike.', image: '/led-floor.png' },
   { index: '03', title: 'Intelligent Lighting', desc: 'Choreographed moving lights and beams that sculpt every atmosphere.', image: '/intelligent-lighting.png' },
   { index: '04', title: 'Decorative Lighting', desc: 'Warm architectural and ambient light that dresses a room with atmosphere.', image: '/intelligent-lighting.png' },
-  { index: '05', title: 'Stage & Set Design', desc: 'Bespoke architectural staging engineered for spectacle and safety.', image: '/hero-stage.png' },
+  { index: '05', title: 'Stage & Set Design', desc: 'Bespoke architectural staging engineered for spectacle and safety.', image: '/transparent-led.png' },
   { index: '06', title: 'Line Array Speakers', desc: 'Concert-grade line arrays tuned for absolute clarity at any scale.', image: '/line-array-audio.png' },
   { index: '07', title: 'Amplifiers', desc: 'Touring-grade amplification delivering clean, headroom-rich power to every speaker.', image: '/line-array-audio.png' },
   { index: '08', title: 'Mixers & Microphones', desc: 'Digital consoles and professional microphones capturing every voice and instrument.', image: '/event-production.png' },
-  { index: '09', title: 'Projection Mapping', desc: 'Turning facades and sculptures into living, projected canvases.', image: '/transparent-led.png' },
-  { index: '10', title: 'Broadcast & Streaming', desc: 'Multi-camera capture and live delivery to millions worldwide.', image: '/event-production.png' },
+  { index: '09', title: 'Projection Mapping', desc: 'Turning facades and sculptures into living, projected canvases.', image: '/laser-mapping.png' },
+  { index: '10', title: 'Broadcast & Streaming', desc: 'Multi-camera capture and live delivery to millions worldwide.', image: '/live-streaming.png' },
   { index: '11', title: 'Power & Distribution', desc: 'Redundant, silent power infrastructure engineered for zero downtime.', image: '/line-array-audio.png' },
-  { index: '12', title: 'Show Control', desc: 'A single timeline commanding light, sound, video and motion as one.', image: '/hero-stage.png' },
+  { index: '12', title: 'Show Control', desc: 'A single timeline commanding light, sound, video and motion as one.', image: '/event-production.png' },
   { index: '13', title: 'On-site Crew', desc: 'Elite technicians who design, install and operate every production.', image: '/event-production.png' },
 ]
 

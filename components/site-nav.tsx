@@ -31,9 +31,6 @@ export function SiteNav() {
         )}
       >
         <a href="/" className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-md border border-white/20">
-            <span className="h-2 w-2 rounded-full bg-accent" />
-          </span>
           <span className="font-display text-lg font-bold tracking-[0.2em]">MINARQ</span>
         </a>
 

@@ -23,13 +23,22 @@ type Slide = {
 // full production systems (LED, speakers, amplifiers, mixers, lighting, decor).
 const SLIDES: Slide[] = [
   {
-    id: 'concert-signature',
-    event: 'Concerts & Live Tours',
-    focus: 'Performer focus · Modular LED · Line array · FOH mix',
-    image: '/minarq-concert-stage.png',
-    alt: 'Concert stage with curved LED walls, suspended line-array speakers and white light beams',
-    origin: '55% 45%',
-    drift: { x: ['0%', '-3%'], y: ['0%', '2%'] },
+    id: 'laser-mapping',
+    event: 'Projection & Laser Mapping',
+    focus: 'Facade focus · 3D projection mapping · Laser beams · Architectural scale',
+    image: '/laser-mapping.png',
+    alt: 'Palace facade transformed by projection mapping into glowing peacock artwork, with laser beams reaching into the night sky',
+    origin: '50% 40%',
+    drift: { x: ['0%', '-2%'], y: ['0%', '2%'] },
+  },
+  {
+    id: 'live-streaming',
+    event: 'Live Broadcast & Streaming',
+    focus: 'Production focus · Multi-camera capture · Vision mixing · Global delivery',
+    image: '/live-streaming.png',
+    alt: 'Live broadcast control point with multi-camera feeds, a vision-mixing console and monitors in front of a concert stage',
+    origin: '45% 45%',
+    drift: { x: ['0%', '3%'], y: ['0%', '-2%'] },
   },
   {
     id: 'corporate',
@@ -41,13 +50,49 @@ const SLIDES: Slide[] = [
     drift: { x: ['0%', '3%'], y: ['0%', '-2%'] },
   },
   {
-    id: 'wedding',
-    event: 'Weddings & Celebrations',
-    focus: 'Couple focus · Scenic LED · Concealed audio · Decorative light',
-    image: '/hero-wedding-production.png',
-    alt: 'Luxury wedding stage with a curved LED screen, warm intelligent lighting and floral decor',
-    origin: '50% 42%',
+    id: 'corporate-summit',
+    event: 'Corporate Summits & Galas',
+    focus: 'Podium focus · Curved panoramic LED · Line array · Chandelier lighting',
+    image: '/corporate.png',
+    alt: 'Ballroom corporate stage with curved panoramic LED walls displaying flowing light waves, moving-head fixtures and chandeliers',
+    origin: '50% 45%',
+    drift: { x: ['0%', '2%'], y: ['0%', '-2%'] },
+  },
+  {
+    id: 'social-gathering',
+    event: 'Social & Community Gatherings',
+    focus: 'Host focus · Floral LED backdrop · Wireless mics · Moving heads',
+    image: '/wedding.png',
+    alt: 'Open-air garden celebration with a floral LED backdrop, mandap lighting and a digital mixing console at front of house',
+    origin: '48% 50%',
     drift: { x: ['0%', '-3%'], y: ['0%', '-2%'] },
+  },
+  {
+    id: 'curved-led',
+    event: 'Curved LED Screens',
+    focus: 'Product focus · Seamless curve · Studio-grade fidelity · Custom fabrication',
+    image: '/curved-led-wall.png',
+    alt: 'Large curved LED video wall displaying gold and black abstract visuals in a dark studio',
+    origin: '50% 50%',
+    drift: { x: ['0%', '-2%'], y: ['0%', '2%'] },
+  },
+  {
+    id: 'grand-entrance',
+    event: 'Grand Entrances & Welcomes',
+    focus: 'Arrival focus · Sunset-lit LED · Stacked line array · Reflective staging',
+    image: '/entrance.png',
+    alt: 'Sunlit outdoor welcome stage with a curved LED backdrop reading Family Welcomes You, flanked by line-array towers',
+    origin: '50% 45%',
+    drift: { x: ['0%', '2%'], y: ['0%', '-2%'] },
+  },
+  {
+    id: 'garden-reception',
+    event: 'Garden Receptions',
+    focus: 'Lounge focus · Floral canopy · LED backdrop · Ambient string lighting',
+    image: '/wed1.png',
+    alt: 'Outdoor garden reception at night with a floral-draped lounge, string lights and a large LED screen displaying a lotus motif',
+    origin: '55% 45%',
+    drift: { x: ['0%', '-2%'], y: ['0%', '2%'] },
   },
   {
     id: 'launch',
@@ -131,7 +176,7 @@ export function Hero() {
     >
       <motion.div style={{ y: imgY, scale: imgScale }} className="gpu absolute inset-0">
         <img
-          src="/hero-stage.png"
+          src="/laser-mapping.png"
           alt=""
           aria-hidden
           className="h-full w-full object-cover"
@@ -170,7 +215,7 @@ export function Hero() {
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
           src="/Concert_stage_with_MINARQ_logo_202607280951.mp4"
-          poster="/hero-stage.png"
+          poster="/laser-mapping.png"
           autoPlay
           muted={isMuted}
           playsInline
@@ -200,16 +245,6 @@ export function Hero() {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-end px-5 pb-28 md:justify-center md:pb-0"
       >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
-          className="mb-6 flex items-center gap-3"
-        >
-          <span className="h-px w-10 bg-accent" />
-          <span className="text-xs uppercase tracking-[0.35em] text-muted-foreground">Premium event technology</span>
-        </motion.div>
-
         <h1 className="max-w-5xl font-sans text-3xl font-bold leading-[1.02] tracking-tight text-balance sm:text-4xl md:text-5xl lg:text-[4rem]">
           {LINES.map((line, index) => (
             <span key={line} className="block overflow-hidden pb-1">

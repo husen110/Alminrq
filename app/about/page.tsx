@@ -85,15 +85,6 @@ const PROCESS = [
   },
 ]
 
-const TEAM = [
-  { name: 'Directorial lead', role: 'Technical Direction' },
-  { name: 'Systems engineer', role: 'Signal & Power' },
-  { name: 'LED specialist', role: 'Display Integration' },
-  { name: 'Audio lead', role: 'Line Array & FOH' },
-  { name: 'Lighting designer', role: 'Programming' },
-  { name: 'Show caller', role: 'Live Operations' },
-]
-
 export default function AboutPage() {
   return (
     <PageShell>
@@ -240,43 +231,6 @@ export default function AboutPage() {
                   </h3>
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     {p.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="border-t border-border px-5 py-24 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <span className="mb-5 flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-muted-foreground">
-              <span className="h-px w-10 bg-accent" /> The team
-            </span>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="max-w-2xl font-display text-3xl font-bold tracking-tight text-balance md:text-5xl">
-              Specialists who have already done it before.
-            </h2>
-          </Reveal>
-          <div className="mt-14 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3">
-            {TEAM.map((m, i) => (
-              <Reveal key={m.role} delay={i * 0.05}>
-                <div className="group">
-                  <div className="overflow-hidden rounded-2xl border border-border">
-                    <img
-                      src="/placeholder-user.jpg"
-                      alt={`MINARQ ${m.role}`}
-                      className="aspect-[4/5] w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
-                    />
-                  </div>
-                  <h3 className="mt-4 font-display text-lg font-semibold tracking-tight">
-                    {m.name}
-                  </h3>
-                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    {m.role}
                   </p>
                 </div>
               </Reveal>

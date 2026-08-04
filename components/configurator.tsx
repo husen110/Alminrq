@@ -34,13 +34,13 @@ const MODES: Mode[] = [
     equipment: ['Kinetic rigging', 'Intelligent lighting', 'LED towers', 'Power'],
   },
   {
-    id: 'gala',
-    label: 'Luxury Gala',
-    image: '/project-gala.png',
+    id: 'garden',
+    label: 'Garden Celebration',
+    image: '/wedding.png',
     headline: 'Elegance rendered in light.',
     atmosphere: 'Refined. Intimate. Golden.',
     glow: 'oklch(0.72 0.13 75 / 0.24)',
-    equipment: ['Transparent LED', 'Projection', 'Immersive AV', 'Show control'],
+    equipment: ['Floral LED backdrop', 'Wireless mics', 'Moving heads', 'Show control'],
   },
   {
     id: 'summit',

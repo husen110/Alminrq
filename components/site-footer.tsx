@@ -37,9 +37,6 @@ export function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-md border border-white/20">
-                <span className="h-2 w-2 rounded-full bg-accent" />
-              </span>
               <span className="font-display text-lg font-bold tracking-[0.2em]">MINARQ</span>
             </div>
             <p className="mt-5 max-w-xs text-pretty text-sm leading-relaxed text-muted-foreground">

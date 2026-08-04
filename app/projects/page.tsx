@@ -21,11 +21,15 @@ type Project = {
 
 const PROJECTS: Project[] = [
   { number: '01', title: 'The Infinite Reveal', location: 'Berlin · Germany', year: '2025', image: '/project-keynote.png', meta: '18K panoramic LED · 4K broadcast · Spatial audio' },
-  { number: '02', title: 'Nocturne', location: 'Milan · Italy', year: '2025', image: '/project-gala.png', meta: 'Transparent LED · Kinetic sculpture · Projection' },
+  { number: '02', title: 'Nocturne', location: 'Milan · Italy', year: '2025', image: '/wedding.png', meta: 'Floral LED backdrop · Wireless audio · Moving heads' },
   { number: '03', title: 'Electric Horizon', location: 'Barcelona · Spain', year: '2024', image: '/project-festival.png', meta: '42m stage · 680 fixtures · 120,000 guests' },
   { number: '04', title: 'State of the Nation', location: 'Dubai · UAE', year: '2024', image: '/project-summit.png', meta: 'Curved LED · Media servers · Global stream' },
-  { number: '05', title: 'Signature Live', location: 'London · UK', year: '2024', image: '/minarq-concert-stage.png', meta: 'Modular LED · Line array · FOH mix' },
-  { number: '06', title: 'Vows in Light', location: 'Como · Italy', year: '2023', image: '/hero-wedding-production.png', meta: 'Scenic LED · Concealed audio · Decorative light' },
+  { number: '05', title: 'Signature Live', location: 'London · UK', year: '2024', image: '/live-streaming.png', meta: 'Multi-camera capture · Vision mixing · Global stream' },
+  { number: '06', title: 'Vows in Light', location: 'Como · Italy', year: '2023', image: '/orchestra.png', meta: 'Scenic LED · Concealed audio · Decorative light' },
+  { number: '07', title: 'The Boardroom Reveal', location: 'Singapore', year: '2023', image: '/corporate.png', meta: 'Panoramic LED · Line array · Lighting control' },
+  { number: '08', title: 'Golden Hour Vows', location: 'Jaipur · India', year: '2023', image: '/wedding.png', meta: 'Floral LED backdrop · Wireless audio · Moving heads' },
+  { number: '09', title: 'Family Welcomes You', location: 'Jaipur · India', year: '2022', image: '/entrance.png', meta: 'Sunset LED backdrop · Stacked line array · Reflective staging' },
+  { number: '10', title: 'Garden of Lotus', location: 'Udaipur · India', year: '2022', image: '/wed1.png', meta: 'Floral canopy · LED screen · Ambient string lighting' },
 ]
 
 export default function ProjectsPage() {
