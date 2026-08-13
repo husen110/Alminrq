@@ -2,6 +2,7 @@
 
 import { ArrowRight } from 'lucide-react'
 import { useState } from 'react'
+import { MagneticButton } from '@/components/magnetic-button'
 
 const STUDIO_EMAIL = 'studio@minarq.com'
 
@@ -39,7 +40,7 @@ function buildWhatsAppUrl(data: Record<string, string>): string {
 }
 
 const fieldClass =
-  'w-full rounded-xl border border-input bg-card/50 px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-accent'
+  'w-full rounded-lg border border-foreground/20 bg-foreground/[0.03] px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-accent'
 
 export function ContactForm() {
   const [sent, setSent] = useState(false)
@@ -97,16 +98,10 @@ export function ContactForm() {
         <textarea name="message" required rows={5} placeholder="Vision, venue, audience size, dates…" className={`${fieldClass} resize-none`} />
       </label>
 
-      <button
-        type="submit"
-        className="group relative mt-2 inline-flex items-center justify-center gap-2 self-start overflow-hidden rounded-full bg-primary px-8 py-4 text-sm font-medium text-primary-foreground transition-colors"
-      >
-        <span className="relative z-10 flex items-center gap-2">
-          Send on WhatsApp
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-        </span>
-        <span className="absolute inset-0 z-0 translate-y-full bg-accent transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
-      </button>
+      <MagneticButton as="button" className="mt-2 self-start">
+        Send on WhatsApp
+        <ArrowRight className="h-4 w-4" />
+      </MagneticButton>
 
       {sent && (
         <p aria-live="polite" className="text-sm text-accent">

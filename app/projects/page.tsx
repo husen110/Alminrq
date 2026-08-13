@@ -36,7 +36,7 @@ export default function ProjectsPage() {
   return (
     <PageShell>
       {/* Header */}
-      <section className="border-b border-border px-5 pb-20 pt-40 md:pb-28 md:pt-52">
+      <section className="px-5 pb-20 pt-40 md:pb-28 md:pt-52">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <span className="mb-6 flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-muted-foreground">
@@ -58,7 +58,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* Grid */}
-      <section className="px-5 py-16 md:py-24">
+      <section className="border-t border-border px-5 py-16 md:py-24">
         <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
           {PROJECTS.map((p, i) => (
             <Reveal key={p.number} delay={(i % 2) * 0.06}>

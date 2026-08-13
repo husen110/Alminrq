@@ -59,7 +59,7 @@ export function Scale() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-border md:grid-cols-4">
           {STATS.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08} className="bg-card">
               <div className="flex h-full flex-col justify-between gap-8 p-6 md:p-8">

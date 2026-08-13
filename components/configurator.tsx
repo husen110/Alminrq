@@ -10,7 +10,6 @@ type Mode = {
   image: string
   headline: string
   atmosphere: string
-  glow: string
   equipment: string[]
 }
 
@@ -21,7 +20,6 @@ const MODES: Mode[] = [
     image: '/project-keynote.png',
     headline: 'A reveal the whole industry watches.',
     atmosphere: 'Precise. Architectural. Cinematic.',
-    glow: 'oklch(0.72 0.12 215 / 0.22)',
     equipment: ['Panoramic LED', 'Show control', 'Broadcast', 'Line array'],
   },
   {
@@ -30,7 +28,6 @@ const MODES: Mode[] = [
     image: '/project-festival.png',
     headline: 'Raw energy, engineered to the frame.',
     atmosphere: 'Immense. Kinetic. Electric.',
-    glow: 'oklch(0.7 0.16 12 / 0.24)',
     equipment: ['Kinetic rigging', 'Intelligent lighting', 'LED towers', 'Power'],
   },
   {
@@ -38,8 +35,7 @@ const MODES: Mode[] = [
     label: 'Garden Celebration',
     image: '/wedding.png',
     headline: 'Elegance rendered in light.',
-    atmosphere: 'Refined. Intimate. Golden.',
-    glow: 'oklch(0.72 0.13 75 / 0.24)',
+    atmosphere: 'Refined. Intimate. Luminous.',
     equipment: ['Floral LED backdrop', 'Wireless mics', 'Moving heads', 'Show control'],
   },
   {
@@ -48,7 +44,6 @@ const MODES: Mode[] = [
     image: '/project-summit.png',
     headline: 'Clarity at the scale of a nation.',
     atmosphere: 'Considered. Seamless. Trusted.',
-    glow: 'oklch(0.72 0.06 260 / 0.22)',
     equipment: ['Curved LED', 'Media servers', 'Streaming', 'On-site crew'],
   },
 ]
@@ -78,10 +73,10 @@ export function Configurator() {
             <button
               key={m.id}
               onClick={() => setActive(i)}
-              className={`rounded-full border px-5 py-2.5 text-sm transition-all duration-300 ${
+              className={`rounded-full border px-5 py-2.5 text-sm transition-all duration-300 active:scale-[0.97] active:duration-100 ${
                 active === i
                   ? 'border-accent bg-accent text-accent-foreground'
-                  : 'border-border text-muted-foreground hover:border-foreground/40 hover:text-foreground'
+                  : 'border-foreground/20 text-muted-foreground hover:border-foreground/50 hover:text-foreground'
               }`}
             >
               {m.label}
@@ -89,7 +84,7 @@ export function Configurator() {
           ))}
         </div>
 
-        <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-border md:aspect-[16/8]">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl md:aspect-[16/8]">
           <AnimatePresence mode="wait">
             <motion.div
               key={mode.id}
@@ -103,44 +98,36 @@ export function Configurator() {
             </motion.div>
           </AnimatePresence>
 
-          <motion.div
-            key={mode.id + '-glow'}
-            className="pointer-events-none absolute inset-0"
-            style={{ background: `radial-gradient(circle at 30% 40%, ${mode.glow}, transparent 60%)` }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-
-          <div className="absolute inset-0 flex flex-col justify-end gap-4 p-6 md:p-12">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={mode.id + '-text'}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <p className="text-xs uppercase tracking-[0.3em] text-accent">{mode.atmosphere}</p>
-                <h3 className="mt-3 max-w-xl font-display text-3xl font-bold tracking-tight text-balance md:text-5xl">
-                  {mode.headline}
-                </h3>
-              </motion.div>
-            </AnimatePresence>
-
-            <div className="flex flex-wrap gap-2">
-              {mode.equipment.map((item) => (
-                <motion.span
-                  key={mode.id + item}
-                  initial={{ opacity: 0, y: 10 }}
+          <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12">
+            <div className="glass w-fit max-w-xl rounded-xl p-6 shadow-lg md:p-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={mode.id + '-text'}
+                  initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="glass rounded-full px-3 py-1.5 text-xs text-foreground/90"
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  {item}
-                </motion.span>
-              ))}
+                  <p className="text-xs uppercase tracking-[0.3em] text-accent">{mode.atmosphere}</p>
+                  <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-balance md:text-4xl">
+                    {mode.headline}
+                  </h3>
+                </motion.div>
+              </AnimatePresence>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {mode.equipment.map((item) => (
+                  <motion.span
+                    key={mode.id + item}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="rounded-full border border-foreground/15 px-3 py-1.5 text-xs text-foreground/80"
+                  >
+                    {item}
+                  </motion.span>
+                ))}
+              </div>
             </div>
           </div>
         </div>

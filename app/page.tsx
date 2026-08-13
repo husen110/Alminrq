@@ -1,6 +1,6 @@
 import { Clients } from '@/components/clients'
-import { Configurator } from '@/components/configurator'
 import { CTA } from '@/components/cta'
+import { EventTypes } from '@/components/event-types'
 import { FeaturedProjects } from '@/components/featured-projects'
 import { Hero } from '@/components/hero'
 import { Intro } from '@/components/intro'
@@ -23,8 +23,8 @@ export default function Page() {
       <Hero />
       <Marquee />
       <Intro />
+      <EventTypes />
       <Services />
-      <Configurator />
       <Showcase />
       <FeaturedProjects />
       <Clients />

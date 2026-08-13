@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Archivo, Inter } from 'next/font/google'
+import { DM_Sans, Inter } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
@@ -9,12 +9,10 @@ const inter = Inter({
   display: 'swap',
 })
 
-// Archivo variable font with the width axis so we can render it expanded
-// (font-stretch: 125%) for the big display headlines.
-const archivo = Archivo({
+const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-space',
-  axes: ['wdth'],
+  weight: ['500', '700'],
   display: 'swap',
 })
 
@@ -26,8 +24,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
-  themeColor: '#0a0a0b',
+  colorScheme: 'light',
+  themeColor: '#ffffff',
 }
 
 export default function RootLayout({
@@ -36,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${archivo.variable}`}>
+    <html lang="en" className={`${inter.variable} ${dmSans.variable}`}>
       <body className="bg-background font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

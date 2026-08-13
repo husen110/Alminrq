@@ -1,7 +1,8 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { useRef, useState } from 'react'
 import { Reveal } from './reveal'
 
 type Service = {
@@ -28,13 +29,33 @@ const SERVICES: Service[] = [
 ]
 
 export function Services() {
-  const [active, setActive] = useState(0)
-  const current = SERVICES[active]
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [progress, setProgress] = useState(0)
+  const [atStart, setAtStart] = useState(true)
+  const [atEnd, setAtEnd] = useState(false)
+
+  const updateScrollState = () => {
+    const track = trackRef.current
+    if (!track) return
+    const max = track.scrollWidth - track.clientWidth
+    const pct = max > 0 ? track.scrollLeft / max : 0
+    setProgress(pct)
+    setAtStart(track.scrollLeft < 4)
+    setAtEnd(track.scrollLeft > max - 4)
+  }
+
+  const scrollByCard = (direction: 1 | -1) => {
+    const track = trackRef.current
+    if (!track) return
+    const card = track.firstElementChild as HTMLElement | null
+    const step = (card?.offsetWidth ?? 320) + 20
+    track.scrollBy({ left: step * direction, behavior: 'smooth' })
+  }
 
   return (
     <section id="services" className="relative border-t border-border py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5">
-        <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <Reveal>
               <span className="mb-5 flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-muted-foreground">
@@ -54,73 +75,75 @@ export function Services() {
             </p>
           </Reveal>
         </div>
+      </div>
 
-        <div className="grid gap-10 lg:grid-cols-[1fr_0.85fr]">
-          <ul className="flex flex-col">
+      <Reveal delay={0.15}>
+        <div className="relative">
+          <div
+            ref={trackRef}
+            onScroll={updateScrollState}
+            className="scrollbar-hide flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-2 [scroll-padding-left:1.25rem] md:px-[calc((100vw-72rem)/2+1.25rem)]"
+          >
             {SERVICES.map((s, i) => (
-              <li key={s.index}>
-                <button
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  className="group flex w-full items-center gap-5 border-b border-border py-5 text-left"
-                >
-                  <span className={`font-mono text-xs transition-colors ${active === i ? 'text-accent' : 'text-muted-foreground'}`}>
-                    {s.index}
-                  </span>
-                  <span className="flex-1">
-                    <span
-                      className={`block font-display text-xl font-semibold tracking-tight transition-all duration-300 md:text-2xl ${
-                        active === i ? 'translate-x-2 text-foreground' : 'text-muted-foreground group-hover:text-foreground'
-                      }`}
-                    >
-                      {s.title}
-                    </span>
-                    <AnimatePresence initial={false}>
-                      {active === i && (
-                        <motion.span
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                          className="block overflow-hidden"
-                        >
-                          <span className="mt-2 block max-w-sm pl-2 text-sm leading-relaxed text-muted-foreground">
-                            {s.desc}
-                          </span>
-                          <span className="mt-4 block overflow-hidden rounded-xl lg:hidden">
-                            <img src={s.image || '/placeholder.svg'} alt={s.title} className="h-52 w-full object-cover" />
-                          </span>
-                        </motion.span>
-                      )}
-                    </AnimatePresence>
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          <div className="hidden lg:block">
-            <div className="sticky top-28 aspect-[4/5] overflow-hidden rounded-2xl border border-border">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={current.image + current.index}
-                  src={current.image}
-                  alt={current.title}
-                  initial={{ opacity: 0, scale: 1.08 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.02 }}
-                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className="absolute inset-0 h-full w-full object-cover"
+              <motion.div
+                key={s.index}
+                initial={{ opacity: 0, scale: 0.88, y: 24 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ root: trackRef, amount: 0.6, once: true }}
+                transition={{ duration: 0.6, delay: (i % 4) * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative aspect-[4/5] w-[240px] shrink-0 snap-start overflow-hidden rounded-2xl shadow-sm sm:w-[280px]"
+              >
+                <img
+                  src={s.image || '/placeholder.svg'}
+                  alt={s.title}
+                  className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
                 />
-              </AnimatePresence>
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6">
-                <span className="font-mono text-xs text-accent">{current.index} / {String(SERVICES.length).padStart(2, '0')}</span>
-                <p className="mt-1 font-display text-2xl font-semibold">{current.title}</p>
-              </div>
-            </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 from-15% via-black/40 via-45% to-transparent" />
+                <span className="absolute left-5 top-5 font-mono text-xs text-white/60">{s.index}</span>
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <h3 className="font-display text-lg font-semibold leading-tight tracking-tight text-white sm:text-xl">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-pretty text-xs leading-relaxed text-white/75 sm:text-sm">
+                    {s.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+            <div className="w-px shrink-0 md:w-[calc((100vw-72rem)/2)]" aria-hidden />
           </div>
+
+          {/* Scroll affordance — hints there's more to the right without a hard-cut edge. */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent sm:w-24" aria-hidden />
+        </div>
+      </Reveal>
+
+      <div className="mx-auto mt-8 flex max-w-6xl items-center gap-5 px-5">
+        <div className="h-1 flex-1 overflow-hidden rounded-full bg-foreground/10">
+          <div
+            className="h-full rounded-full bg-accent transition-[width] duration-150 ease-out"
+            style={{ width: `${8 + progress * 92}%` }}
+          />
+        </div>
+        <div className="flex shrink-0 items-center gap-2">
+          <button
+            type="button"
+            onClick={() => scrollByCard(-1)}
+            disabled={atStart}
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-foreground/10 text-foreground transition-all active:scale-[0.9] active:duration-100 hover:bg-accent hover:text-accent-foreground disabled:pointer-events-none disabled:opacity-30"
+            aria-label="Previous discipline"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollByCard(1)}
+            disabled={atEnd}
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-foreground/10 text-foreground transition-all active:scale-[0.9] active:duration-100 hover:bg-accent hover:text-accent-foreground disabled:pointer-events-none disabled:opacity-30"
+            aria-label="Next discipline"
+          >
+            <ArrowRight className="h-4 w-4" />
+          </button>
         </div>
       </div>
     </section>

@@ -89,7 +89,7 @@ export default function AboutPage() {
   return (
     <PageShell>
       {/* Header */}
-      <section className="relative border-b border-border px-5 pb-24 pt-40 md:pb-32 md:pt-52">
+      <section className="relative px-5 pb-24 pt-40 md:pb-32 md:pt-52">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <span className="mb-6 flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-muted-foreground">
@@ -112,7 +112,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section className="border-b border-border px-5 py-16 md:py-20">
+      <section className="border-t border-border px-5 py-16 md:py-20">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
           {STATS.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.05}>
@@ -130,10 +130,10 @@ export default function AboutPage() {
       </section>
 
       {/* Philosophy + image */}
-      <section className="px-5 py-24 md:py-32">
+      <section className="border-t border-border px-5 py-24 md:py-32">
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <Reveal>
-            <div className="overflow-hidden rounded-2xl border border-border">
+            <div className="overflow-hidden rounded-2xl">
               <img
                 src="/portrait-director.png"
                 alt="MINARQ technical director on a production site"
@@ -155,7 +155,7 @@ export default function AboutPage() {
             <div className="mt-10 flex flex-col gap-8">
               {PRINCIPLES.map((p, i) => (
                 <Reveal key={p.n} delay={0.05 + i * 0.05}>
-                  <div className="flex gap-5 border-t border-border pt-6">
+                  <div className="flex gap-5  pt-6">
                     <span className="font-mono text-xs text-accent">{p.n}</span>
                     <div>
                       <h3 className="font-display text-xl font-semibold tracking-tight">
@@ -189,7 +189,7 @@ export default function AboutPage() {
           <div className="mt-16 flex flex-col">
             {TIMELINE.map((t, i) => (
               <Reveal key={t.year} delay={i * 0.05}>
-                <div className="grid gap-4 border-t border-border py-8 md:grid-cols-[160px_1fr] md:gap-10">
+                <div className="grid gap-4  py-8 md:grid-cols-[160px_1fr] md:gap-10">
                   <p className="font-display text-2xl font-bold tracking-tight text-accent md:text-3xl">
                     {t.year}
                   </p>
@@ -221,7 +221,7 @@ export default function AboutPage() {
               One team, four stages, zero hand-offs.
             </h2>
           </Reveal>
-          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-2 lg:grid-cols-4">
             {PROCESS.map((p, i) => (
               <Reveal key={p.n} delay={i * 0.05}>
                 <div className="flex h-full flex-col gap-6 bg-background p-8 transition-colors hover:bg-muted/40">
@@ -257,7 +257,7 @@ export default function AboutPage() {
           <Reveal delay={0.1}>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm transition-colors hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-2 rounded-full bg-foreground/10 px-6 py-3 text-sm transition-all active:scale-[0.97] active:duration-100 hover:bg-accent hover:text-accent-foreground"
             >
               See open roles
             </a>

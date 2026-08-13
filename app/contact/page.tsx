@@ -45,7 +45,7 @@ export default function ContactPage() {
               {DETAILS.map((d, i) => (
                 <Reveal key={d.label} delay={0.1 + i * 0.05}>
                   <div className="flex items-center gap-4">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-accent">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-foreground/10 text-accent">
                       <d.icon className="h-4 w-4" />
                     </span>
                     <div>
@@ -66,7 +66,7 @@ export default function ContactPage() {
 
           {/* Right — form */}
           <Reveal delay={0.15}>
-            <div className="glass rounded-3xl border border-border p-6 md:p-8">
+            <div className="glass rounded-2xl p-6 md:p-8">
               <ContactForm />
             </div>
           </Reveal>

@@ -6,7 +6,6 @@ const COLUMNS = [
       { label: 'Stage Production', href: '/#services' },
       { label: 'Audio Systems', href: '/#services' },
       { label: 'Lighting', href: '/#services' },
-      { label: 'Configurator', href: '/#configure' },
     ],
   },
   {

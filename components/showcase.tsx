@@ -1,58 +1,44 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
 import { useRef } from 'react'
-import { Reveal } from './reveal'
 
 export function Showcase() {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'end start'],
+    offset: ['start start', 'end end'],
   })
-  const y = useTransform(scrollYProgress, [0, 1], ['-12%', '12%'])
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1.05, 1.15])
+
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.25, 1.08, 1.25])
+  const imageY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
+  const overlay = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.35, 0.55, 0.55, 0.35])
+
+  const textOpacity = useTransform(scrollYProgress, [0.1, 0.32, 0.7, 0.92], [0, 1, 1, 0])
+  const textScale = useTransform(scrollYProgress, [0.1, 0.4, 1], [1.35, 1, 0.88])
+  const textBlur = useTransform(scrollYProgress, [0.1, 0.32, 0.7, 0.92], [10, 0, 0, 10])
+  const textFilter = useTransform(textBlur, (v) => `blur(${v}px)`)
 
   return (
-    <section id="showcase" ref={ref} className="relative h-[90svh] w-full overflow-hidden">
-      <motion.div style={{ y, scale }} className="absolute inset-0">
-        <img
-          src="/event-production.png"
-          alt="A massive world-class event production with an enormous LED stage over a huge crowd"
-          className="h-full w-full object-cover"
-        />
-      </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/60" />
+    <section ref={ref} className="relative h-[220svh] w-full">
+      <div id="showcase" className="sticky top-0 h-svh w-full overflow-hidden">
+        <motion.div style={{ scale: imageScale, y: imageY }} className="absolute inset-0">
+          <img
+            src="/event-production.png"
+            alt="A massive world-class event production with an enormous LED stage over a huge crowd"
+            className="h-full w-full object-cover"
+          />
+        </motion.div>
+        <motion.div style={{ opacity: overlay }} className="absolute inset-0 bg-black" />
 
-      <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-center px-5">
-        <Reveal>
-          <span className="mb-6 flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-muted-foreground">
-            <span className="h-px w-10 bg-accent" /> Signature Production
-          </span>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="max-w-3xl font-display text-4xl font-bold leading-[1] tracking-tight text-balance md:text-7xl">
-            Built for the moments the whole world is watching.
-          </h2>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <p className="mt-6 max-w-md text-pretty leading-relaxed text-muted-foreground">
-            From arena keynotes to national ceremonies, MINARQ delivers
-            infrastructure that performs flawlessly under the brightest lights.
-          </p>
-        </Reveal>
-        <Reveal delay={0.15}>
-          <a
-            href="#contact"
-            className="group mt-10 inline-flex items-center gap-2 text-sm font-medium"
+        <div className="relative flex h-full w-full items-center justify-center px-6">
+          <motion.h2
+            style={{ opacity: textOpacity, scale: textScale, filter: textFilter }}
+            className="max-w-4xl text-balance text-center font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight text-white [text-shadow:0_4px_40px_rgb(0_0_0_/_0.5)] sm:text-5xl md:text-7xl"
           >
-            View selected work
-            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground">
-              <ArrowUpRight className="h-4 w-4" />
-            </span>
-          </a>
-        </Reveal>
+            Where the impossible becomes unforgettable.
+          </motion.h2>
+        </div>
       </div>
     </section>
   )

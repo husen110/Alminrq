@@ -11,49 +11,42 @@ const PROJECTS = [
     title: 'The Infinite Reveal',
     location: 'Berlin · Germany',
     image: '/project-keynote.png',
-    meta: '18K panoramic LED · 4K broadcast · Spatial audio',
   },
   {
     number: '02',
     title: 'Nocturne',
     location: 'Milan · Italy',
     image: '/wedding.png',
-    meta: 'Floral LED backdrop · Wireless audio · Moving heads',
   },
   {
     number: '03',
     title: 'Electric Horizon',
     location: 'Barcelona · Spain',
     image: '/project-festival.png',
-    meta: '42m stage · 680 fixtures · 120,000 guests',
   },
   {
     number: '04',
     title: 'Vows in Light',
     location: 'Como · Italy',
     image: '/orchestra.png',
-    meta: 'Scenic LED · Concealed audio · Decorative light',
   },
   {
     number: '05',
     title: 'State of the Nation',
     location: 'Dubai · UAE',
     image: '/corporate.png',
-    meta: 'Panoramic LED · Media servers · Global stream',
   },
   {
     number: '06',
     title: 'Family Welcomes You',
     location: 'Jaipur · India',
     image: '/entrance.png',
-    meta: 'Sunset LED backdrop · Stacked line array · Reflective staging',
   },
   {
     number: '07',
     title: 'Garden of Lotus',
     location: 'Udaipur · India',
     image: '/wed1.png',
-    meta: 'Floral canopy · LED screen · Ambient string lighting',
   },
 ]
 
@@ -85,30 +78,44 @@ export function FeaturedProjects() {
   )
 }
 
-function Project({ number, title, location, image, meta }: (typeof PROJECTS)[number]) {
+function Project({ number, title, location, image }: (typeof PROJECTS)[number]) {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.12, 1, 1.1])
   const y = useTransform(scrollYProgress, [0, 1], ['-5%', '5%'])
 
   return (
-    <article ref={ref} className="group relative h-[72svh] min-h-[560px] overflow-hidden rounded-2xl border border-border">
-      <motion.img style={{ scale, y }} src={image} alt={title} className="gpu absolute inset-0 h-[110%] w-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-background/30" />
-      <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-10">
-        <div className="flex items-start justify-between">
-          <span className="font-mono text-xs text-foreground/70">PROJECT / {number}</span>
-          <span className="glass rounded-full px-4 py-2 text-xs uppercase tracking-[0.2em]">{location}</span>
-        </div>
-        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.28em] text-accent">{meta}</p>
-            <h3 className="font-display text-4xl font-bold tracking-tight md:text-7xl">{title}</h3>
+    <article ref={ref} className="group relative h-[72svh] min-h-[560px] overflow-hidden rounded-2xl">
+      <motion.img
+        style={{ scale, y }}
+        src={image}
+        alt={title}
+        className="gpu absolute inset-0 h-[110%] w-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 from-10% via-black/25 via-45% to-transparent" />
+
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 p-6 md:p-10">
+        <div className="flex items-end gap-5 md:gap-8">
+          <span className="font-display text-5xl font-bold leading-none text-accent md:text-7xl">
+            {number}
+          </span>
+          <div className="mb-1.5 h-10 w-px shrink-0 bg-white/25 md:mb-2 md:h-14" />
+          <div className="min-w-0">
+            <p className="mb-2 text-xs uppercase tracking-[0.25em] text-white/60">
+              {location}
+            </p>
+            <h3 className="font-display text-2xl font-bold tracking-tight text-balance text-white md:text-4xl">
+              {title}
+            </h3>
           </div>
-          <a href="#contact" className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground/25 transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground" aria-label={`View ${title}`}>
-            <ArrowUpRight className="h-5 w-5" />
-          </a>
         </div>
+        <a
+          href="#contact"
+          className="glass flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white transition-all duration-300 active:scale-90 active:duration-100 group-hover:-rotate-12 group-hover:bg-accent group-hover:text-accent-foreground"
+          aria-label={`View ${title}`}
+        >
+          <ArrowUpRight className="h-5 w-5" />
+        </a>
       </div>
     </article>
   )

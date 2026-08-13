@@ -72,7 +72,7 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.5rem;
+  --radius: 0rem;
   --sidebar: oklch(0.11 0.003 260);
   --sidebar-foreground: oklch(0.97 0 0);
   --sidebar-primary: oklch(0.72 0.13 75);
@@ -164,7 +164,7 @@
     font-feature-settings: "ss01", "cv01";
   }
   ::selection {
-    background: oklch(0.72 0.13 75 / 0.3);
+    background: color-mix(in oklab, var(--accent) 25%, transparent);
   }
   /* Visible keyboard focus — the base `*` rule only sets an outline color,
      never a width/style, so focus was effectively invisible. */
@@ -179,22 +179,22 @@
   .text-balance {
     text-wrap: balance;
   }
-  /* Render Archivo's width axis slightly expanded for the display headlines. */
-  .font-display {
-    font-stretch: 110%;
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  /* Liquid Glass: frosted floating chrome — used sparingly (nav, badges,
+     hero caption), never as a full-page background.
+     Blur routes through Tailwind's own backdrop-blur/saturate utilities
+     (via @apply) — a hand-written `backdrop-filter` property here was
+     silently dropped by the Turbopack CSS pipeline. */
   .glass {
-    background: color-mix(in oklch, var(--card) 55%, transparent);
-    backdrop-filter: blur(20px) saturate(140%);
-    -webkit-backdrop-filter: blur(20px) saturate(140%);
-    border: 1px solid oklch(1 0 0 / 8%);
-  }
-  .grain {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-  }
-  .cinematic-grid {
-    background-image: linear-gradient(oklch(1 0 0 / 4%) 1px, transparent 1px), linear-gradient(90deg, oklch(1 0 0 / 4%) 1px, transparent 1px);
-    background-size: 64px 64px;
+    @apply backdrop-blur-xl backdrop-saturate-150;
+    background: color-mix(in oklab, var(--card) 65%, transparent);
+    border: 1px solid color-mix(in oklab, var(--foreground) 10%, transparent);
   }
   .gpu {
     transform: translateZ(0);
@@ -203,26 +203,31 @@
   }
 }
 
-/* Keep the authored dark palette stable regardless of OS preference.
-   Neutrals carry a subtle warm tint (hue 74) that ties into the gold accent
-   so the greys read intentional rather than dead-neutral. */
+/* Premium enterprise palette (ui-ux-pro-max: Luxury/Premium Brand) —
+   warm off-white, near-black type, a single restrained gold accent used
+   only for CTAs and highlights. Soft "Liquid Glass" surfaces for floating
+   chrome (nav, badges, hero caption) layered on top. */
 :root,
 .dark {
-  --background: oklch(0.09 0.008 74);
-  --foreground: oklch(0.97 0.005 74);
-  --card: oklch(0.13 0.008 74);
-  --card-foreground: oklch(0.97 0.005 74);
-  --popover: oklch(0.12 0.008 74);
-  --popover-foreground: oklch(0.97 0.005 74);
-  --primary: oklch(0.97 0.005 74);
-  --primary-foreground: oklch(0.09 0.008 74);
-  --secondary: oklch(0.18 0.008 74);
-  --muted: oklch(0.18 0.008 74);
-  --muted-foreground: oklch(0.70 0.014 74);
-  --accent: oklch(0.72 0.13 75);
-  --accent-foreground: oklch(0.12 0.01 75);
-  --border: oklch(1 0 0 / 8%);
-  --ring: oklch(0.72 0.13 75);
+  color-scheme: light;
+  --background: #fafaf9;
+  --foreground: #0c0a09;
+  --card: #ffffff;
+  --card-foreground: #0c0a09;
+  --popover: #ffffff;
+  --popover-foreground: #0c0a09;
+  --primary: #1c1917;
+  --primary-foreground: #ffffff;
+  --secondary: #44403c;
+  --secondary-foreground: #ffffff;
+  --muted: #f0eeec;
+  --muted-foreground: #6b675f;
+  --accent: #a16207;
+  --accent-foreground: #ffffff;
+  --border: #d6d3d1;
+  --input: #d6d3d1;
+  --ring: #1c1917;
+  --radius: 0.75rem;
 }
 
 html {
@@ -236,5 +241,24 @@ html {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Liquid Glass must degrade gracefully — never trap a user who has asked
+   the OS for more solid, more contrasted, or less moving surfaces. */
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: var(--card);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .glass {
+    background: var(--card);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: var(--foreground);
   }
 }

@@ -29,7 +29,7 @@ export function ProjectCard({ number, title, location, year, image, meta }: Proj
     <a
       ref={ref}
       href="/contact"
-      className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-border"
+      className="group relative block aspect-[4/3] overflow-hidden rounded-2xl transition-transform active:scale-[0.985] active:duration-100"
     >
       <motion.div style={{ y }} className="absolute inset-x-0 -top-[14%] h-[128%]">
         <img
@@ -39,24 +39,23 @@ export function ProjectCard({ number, title, location, year, image, meta }: Proj
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-background/10" />
       <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
         <div className="flex items-start justify-between">
-          <span className="font-mono text-xs text-foreground/70">PROJECT / {number}</span>
+          <span className="glass rounded-full px-3 py-1.5 font-mono text-xs">PROJECT / {number}</span>
           <span className="glass rounded-full px-3 py-1.5 text-[11px] uppercase tracking-[0.2em]">
             {year}
           </span>
         </div>
-        <div>
+        <div className="glass w-fit max-w-[calc(100%-1rem)] rounded-xl p-4 shadow-lg sm:max-w-xs md:p-5">
           <p className="mb-2 text-[11px] uppercase tracking-[0.24em] text-accent">{meta}</p>
-          <div className="flex items-end justify-between gap-4">
+          <div className="flex items-end justify-between gap-6">
             <div>
               <h2 className="font-display text-2xl font-bold tracking-tight md:text-4xl">{title}</h2>
               <p className="mt-1 text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 {location}
               </p>
             </div>
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-foreground/25 transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-foreground/10 transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
               <ArrowUpRight className="h-5 w-5" />
             </span>
           </div>
