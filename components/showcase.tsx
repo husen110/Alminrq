@@ -24,8 +24,10 @@ export function Showcase() {
       <div id="showcase" className="sticky top-0 h-svh w-full overflow-hidden">
         <motion.div style={{ scale: imageScale, y: imageY }} className="absolute inset-0">
           <img
-            src="/event-production.png"
+            src="/duane-loux-6Qk8LTt4u70-unsplash.jpg"
             alt="A massive world-class event production with an enormous LED stage over a huge crowd"
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover"
           />
         </motion.div>

@@ -1,52 +1,8 @@
 'use client'
 
 import { ArrowUpRight } from 'lucide-react'
+import { EVENTS } from '@/lib/events-data'
 import { Reveal } from './reveal'
-
-const EVENTS = [
-  {
-    label: 'Concerts & Live Tours',
-    desc: 'Arena-scale rigs built to survive a 40-city run.',
-    image: '/minarq-concert-stage.png',
-    span: 'lg:col-span-2 lg:row-span-2',
-    large: true,
-  },
-  {
-    label: 'Corporate & Keynotes',
-    desc: '',
-    image: '/hero-corporate-production.png',
-    span: '',
-    large: false,
-  },
-  {
-    label: 'Weddings & Celebrations',
-    desc: '',
-    image: '/hero-wedding-production.png',
-    span: '',
-    large: false,
-  },
-  {
-    label: 'Galas & Summits',
-    desc: '',
-    image: '/project-summit.png',
-    span: '',
-    large: false,
-  },
-  {
-    label: 'Product Launches',
-    desc: '',
-    image: '/hero-launch-production.png',
-    span: '',
-    large: false,
-  },
-  {
-    label: 'Festivals',
-    desc: 'Six-figure crowds, zero downtime, every time.',
-    image: '/project-festival.png',
-    span: 'lg:col-span-4',
-    large: true,
-  },
-]
 
 export function EventTypes() {
   return (
@@ -75,11 +31,16 @@ export function EventTypes() {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7 lg:auto-rows-[200px]">
           {EVENTS.map((event, i) => (
-            <Reveal key={event.label} delay={(i % 4) * 0.05} className={event.span}>
-              <div className="group relative h-full min-h-[220px] overflow-hidden rounded-2xl shadow-sm">
+            <Reveal key={event.slug} delay={(i % 4) * 0.05} className={event.span}>
+              <a
+                href={`/events/${event.slug}`}
+                className="group relative block h-full min-h-[220px] overflow-hidden rounded-2xl shadow-sm"
+              >
                 <img
                   src={event.image}
                   alt={event.label}
+                  loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/45 transition-colors duration-500 group-hover:bg-black/55" />
@@ -98,7 +59,7 @@ export function EventTypes() {
                     </p>
                   )}
                 </div>
-              </div>
+              </a>
             </Reveal>
           ))}
         </div>

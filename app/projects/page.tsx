@@ -1,36 +1,15 @@
 import { CTA } from '@/components/cta'
 import { PageShell } from '@/components/page-shell'
-import { ProjectCard } from '@/components/project-card'
+import { ProjectTypeRow } from '@/components/project-type-row'
 import { Reveal } from '@/components/reveal'
 import type { Metadata } from 'next'
+import { PROJECTS } from './data'
 
 export const metadata: Metadata = {
   title: 'Selected Work — MINARQ',
   description:
     'A selection of concerts, keynotes, galas and launches engineered by MINARQ — immersive LED, precision sound and architectural light at cultural scale.',
 }
-
-type Project = {
-  number: string
-  title: string
-  location: string
-  year: string
-  image: string
-  meta: string
-}
-
-const PROJECTS: Project[] = [
-  { number: '01', title: 'The Infinite Reveal', location: 'Berlin · Germany', year: '2025', image: '/project-keynote.png', meta: '18K panoramic LED · 4K broadcast · Spatial audio' },
-  { number: '02', title: 'Nocturne', location: 'Milan · Italy', year: '2025', image: '/wedding.png', meta: 'Floral LED backdrop · Wireless audio · Moving heads' },
-  { number: '03', title: 'Electric Horizon', location: 'Barcelona · Spain', year: '2024', image: '/project-festival.png', meta: '42m stage · 680 fixtures · 120,000 guests' },
-  { number: '04', title: 'State of the Nation', location: 'Dubai · UAE', year: '2024', image: '/project-summit.png', meta: 'Curved LED · Media servers · Global stream' },
-  { number: '05', title: 'Signature Live', location: 'London · UK', year: '2024', image: '/live-streaming.png', meta: 'Multi-camera capture · Vision mixing · Global stream' },
-  { number: '06', title: 'Vows in Light', location: 'Como · Italy', year: '2023', image: '/orchestra.png', meta: 'Scenic LED · Concealed audio · Decorative light' },
-  { number: '07', title: 'The Boardroom Reveal', location: 'Singapore', year: '2023', image: '/corporate.png', meta: 'Panoramic LED · Line array · Lighting control' },
-  { number: '08', title: 'Golden Hour Vows', location: 'Jaipur · India', year: '2023', image: '/wedding.png', meta: 'Floral LED backdrop · Wireless audio · Moving heads' },
-  { number: '09', title: 'Family Welcomes You', location: 'Jaipur · India', year: '2022', image: '/entrance.png', meta: 'Sunset LED backdrop · Stacked line array · Reflective staging' },
-  { number: '10', title: 'Garden of Lotus', location: 'Udaipur · India', year: '2022', image: '/wed1.png', meta: 'Floral canopy · LED screen · Ambient string lighting' },
-]
 
 export default function ProjectsPage() {
   return (
@@ -57,12 +36,12 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Grid */}
+      {/* Four horizontal project-type rows */}
       <section className="border-t border-border px-5 py-16 md:py-24">
-        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
+        <div className="mx-auto flex max-w-6xl flex-col gap-6">
           {PROJECTS.map((p, i) => (
-            <Reveal key={p.number} delay={(i % 2) * 0.06}>
-              <ProjectCard {...p} />
+            <Reveal key={p.slug} delay={i * 0.05}>
+              <ProjectTypeRow {...p} />
             </Reveal>
           ))}
         </div>

@@ -204,13 +204,13 @@
 }
 
 /* Premium enterprise palette (ui-ux-pro-max: Luxury/Premium Brand) —
-   warm off-white, near-black type, a single restrained gold accent used
+   pure white, near-black type, a single restrained gold accent used
    only for CTAs and highlights. Soft "Liquid Glass" surfaces for floating
    chrome (nav, badges, hero caption) layered on top. */
 :root,
 .dark {
   color-scheme: light;
-  --background: #fafaf9;
+  --background: #ffffff;
   --foreground: #0c0a09;
   --card: #ffffff;
   --card-foreground: #0c0a09;
@@ -220,18 +220,43 @@
   --primary-foreground: #ffffff;
   --secondary: #44403c;
   --secondary-foreground: #ffffff;
-  --muted: #f0eeec;
+  --muted: #f5f5f4;
   --muted-foreground: #6b675f;
   --accent: #a16207;
   --accent-foreground: #ffffff;
-  --border: #d6d3d1;
-  --input: #d6d3d1;
+  --border: #e7e5e4;
+  --input: #e7e5e4;
   --ring: #1c1917;
   --radius: 0.75rem;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Every section wraps its content in Tailwind's `max-w-6xl` (72rem). That's
+   comfortable up to a large laptop, but on wide desktop/ultrawide/4K
+   monitors it leaves the whole site stranded in a narrow column with huge
+   empty margins. Grow the cap in stages past Tailwind's own breakpoints —
+   base value matches max-w-6xl exactly, so nothing changes below 1600px. */
+:root {
+  --container-max: 72rem;
+}
+
+@media (min-width: 1600px) {
+  :root { --container-max: 84rem; }
+}
+
+@media (min-width: 2000px) {
+  :root { --container-max: 96rem; }
+}
+
+@media (min-width: 2600px) {
+  :root { --container-max: 110rem; }
+}
+
+.max-w-6xl {
+  max-width: var(--container-max);
 }
 
 @media (prefers-reduced-motion: reduce) {

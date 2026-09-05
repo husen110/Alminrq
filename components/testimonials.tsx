@@ -32,7 +32,7 @@ export function Testimonials() {
     <section className="relative overflow-hidden border-t border-border py-24 md:py-32">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-[0.8fr_1.2fr] md:items-stretch">
         <Reveal className="relative min-h-[440px] overflow-hidden rounded-2xl">
-          <img src="/portrait-director.png" alt="Creative director backstage at an event" className="absolute inset-0 h-full w-full object-cover" />
+          <img src="/portrait-director.png" alt="Creative director backstage at an event" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
         </Reveal>
 
         <div className="flex min-h-[440px] flex-col justify-between rounded-2xl bg-card p-7 md:p-12">
